@@ -1,5 +1,6 @@
 package com.track.searcher.tracksearcher.controller;
 
+import com.track.searcher.tracksearcher.exception.PlaylistNotFoundException;
 import com.track.searcher.tracksearcher.model.Track;
 import com.track.searcher.tracksearcher.searcher.TrackRepository;
 import com.track.searcher.tracksearcher.searcher.TrackSearcher;
@@ -14,12 +15,12 @@ import java.util.List;
 public class TrackRestController {
 
     @GetMapping(value = {"/{genre}", "/{genre}/{repository}"})
-    public List<Track> getTracks(@PathVariable String genre, @PathVariable String repository) {
+    public List<Track> getTracks(@PathVariable String genre, @PathVariable String repository) throws PlaylistNotFoundException {
         TrackRepository trackRepository = TrackRepository.fromText(repository);
         TrackSearcher trackSearcher = TrackSearcherFactory.getTrackSearcher(trackRepository);
         List<Track> tracks;
 
-        tracks = trackSearcher.retrieveCachedEntry(genre, "");
+        tracks = trackSearcher.retrieveCachedEntry(genre, trackRepository);
         if (tracks == null){
             tracks = trackSearcher.getPlaylistFrom(genre);
         }
