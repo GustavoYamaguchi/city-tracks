@@ -38,7 +38,7 @@ public class Response {
             "          },\n" +
             "          \"href\": \"https://api.spotify.com/v1/albums/2i9W1XdzepsyFq3DkqXXzy\",\n" +
             "          \"id\": \"2i9W1XdzepsyFq3DkqXXzy\",\n" +
-            "          \"name\": \"Christmas Classics Featuring Rudolph The Red-Nosed Reindeer, Frosty The Snowman & The Little Drummer Boy\",\n" +
+            "          \"name\": \"Christmas Classics Featuring Rudolph The Red-Nosed Reindeer, Frosty The Snowman & The Little Drummer Boy\"\n" +
             "        },\n" +
             "        \"artists\": [\n" +
             "          {\n" +

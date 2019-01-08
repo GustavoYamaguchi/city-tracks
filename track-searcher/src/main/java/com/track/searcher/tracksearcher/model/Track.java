@@ -1,6 +1,7 @@
 package com.track.searcher.tracksearcher.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Track {
     private String name;
@@ -29,5 +30,21 @@ public class Track {
 
     public void setAlbumName(String albumName) {
         this.albumName = albumName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Track track = (Track) o;
+        return Objects.equals(name, track.name) &&
+                Objects.equals(artists, track.artists) &&
+                Objects.equals(albumName, track.albumName);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(name, artists, albumName);
     }
 }
