@@ -6,9 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class TrackSearcherApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TrackSearcherApplication.class, args);
-	}
-
+    public static void main(String[] args) {
+        SpringApplication.run(TrackSearcherApplication.class, args);
+    }
 }
 
