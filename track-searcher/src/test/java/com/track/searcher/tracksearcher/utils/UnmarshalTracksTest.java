@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class UnmarshalTracksTest {
 
@@ -40,5 +40,13 @@ public class UnmarshalTracksTest {
         assertEquals(expectedAlbumNameSecondSong, tracks.get(1).getAlbumName());
 
         assertEquals(5, tracks.stream().distinct().count());
+    }
+
+    @Test
+    public void testUnmarshalEmptyData() {
+        TracksTemplate tracksTemplate = new Gson().fromJson(Response.EMPTY_TRACKS_TEMPLATE_SPOTIFY, TracksTemplate.class);
+        List<Track> tracks = UnmarshalTracks.unmarshalTracks(tracksTemplate);
+
+        assertEquals(0, tracks.size());
     }
 }

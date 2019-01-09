@@ -9,13 +9,15 @@ import java.util.List;
 public class UnmarshalTracks {
     public static List<Track> unmarshalTracks(TracksTemplate tracksTemplate) {
         List<Track> tracks = new ArrayList<>();
-        tracksTemplate.getItems().stream().forEach(t -> {
-            Track track = new Track();
-            track.setName(t.getTrack().getName());
-            track.setArtists(getAllArtists(t));
-            track.setAlbumName(t.getTrack().getAlbum().getName());
-            tracks.add(track);
-        });
+        if (tracksTemplate.getItems() != null && tracksTemplate.getItems().size() > 0) {
+            tracksTemplate.getItems().stream().forEach(t -> {
+                Track track = new Track();
+                track.setName(t.getTrack().getName());
+                track.setArtists(getAllArtists(t));
+                track.setAlbumName(t.getTrack().getAlbum().getName());
+                tracks.add(track);
+            });
+        }
         return tracks;
     }
 

@@ -2,6 +2,7 @@ package com.track.searcher.tracksearcher.utils.templates;
 
 public class Response {
 
+    public static final String EMPTY_TRACKS_TEMPLATE_SPOTIFY = "{ }";
     public static final String VALID_TRACKS_TEMPLATE_SPOTIFY = "{\n" +
             "  \"href\": \"https://api.spotify.com/v1/playlists/37i9dQZF1DX6R7QUWePReA/tracks?offset=0&limit=100\",\n" +
             "  \"items\": [\n" +

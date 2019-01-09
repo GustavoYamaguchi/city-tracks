@@ -10,11 +10,9 @@ import com.track.searcher.tracksearcher.utils.templates.ApiKey;
 import com.track.searcher.tracksearcher.utils.templates.Playlist;
 import com.track.searcher.tracksearcher.utils.templates.TracksTemplate;
 import org.springframework.http.*;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 public class SpotifySearcher implements TrackSearcher {
 
     public static final String QUERY_PLAYLIST_URL = "https://api.spotify.com/v1/search?q=%s&type=playlist&limit=1";
