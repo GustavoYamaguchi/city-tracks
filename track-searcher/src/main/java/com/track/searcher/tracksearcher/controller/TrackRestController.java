@@ -22,7 +22,7 @@ public class TrackRestController {
         TrackSearcher trackSearcher = TrackSearcherFactory.getTrackSearcher(trackRepository);
         List<Track> tracks;
 
-        tracks = trackSearcher.retrieveCachedEntry(genre, trackRepository);
+        tracks = trackSearcher.retrieveCachedPlaylist(genre, trackRepository);
         if (tracks == null){
             tracks = trackSearcher.getPlaylistFrom(genre);
         }

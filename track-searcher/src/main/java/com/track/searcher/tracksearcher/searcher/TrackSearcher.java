@@ -20,7 +20,7 @@ public interface TrackSearcher {
      * @param repository
      * @return
      */
-    default List<Track> retrieveCachedEntry(String genre, TrackRepository repository) {
+    default List<Track> retrieveCachedPlaylist(String genre, TrackRepository repository) {
         //TODO: retrieve tracks from cache
         return null;
     }
