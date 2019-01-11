@@ -56,7 +56,7 @@ public class OpenWeatherMapSearcher implements WeatherSearcher {
             throws InvalidLocationException {
         String url;
         switch (locationType) {
-            case CITY:
+            case CITY_NAME:
                 url = String.format(QUERY_WEATHER_BY_NAME_URL, location.getCity(), appId);
                 return RequestUtil.getResponse(null, HttpMethod.GET, null, url, OpenWeatherMapTemplate.class);
             case LAT_LON:

@@ -7,7 +7,7 @@ public class LocationUtil {
 
     public static LocationType getLocationType(Location location) {
         if (location.getCity() != null && !location.getCity().isEmpty()) {
-            return LocationType.CITY;
+            return LocationType.CITY_NAME;
         }
         if (location.getLatitude() == null || location.getLongitude() == null) {
             return LocationType.INVALID;
