@@ -1,9 +1,8 @@
-package com.track.searcher.tracksearcher.utils;
+package com.track.searcher.tracksearcher.utils.templates.trackresponse;
 
 import com.google.gson.Gson;
 import com.track.searcher.tracksearcher.model.Track;
 import com.track.searcher.tracksearcher.utils.templates.Response;
-import com.track.searcher.tracksearcher.utils.templates.TracksTemplate;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -11,12 +10,12 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class UnmarshalTracksTest {
+public class SpotifyTemplateTests {
 
     @Test
     public void testUnmarshalTracks() {
-        TracksTemplate tracksTemplate = new Gson().fromJson(Response.VALID_TRACKS_TEMPLATE_SPOTIFY, TracksTemplate.class);
-        List<Track> tracks = UnmarshalTracks.unmarshalTracks(tracksTemplate);
+        SpotifyTemplate tracksTemplate = new Gson().fromJson(Response.VALID_TRACKS_TEMPLATE_SPOTIFY, SpotifyTemplate.class);
+        List<Track> tracks = tracksTemplate.getNormalizedTracks();
         List<String> expectedArtistsFirstSong = new ArrayList<>();
         expectedArtistsFirstSong.add("Brenda Lee");
         String expectedNameFirstSong = "Rockin' Around The Christmas Tree";
@@ -44,8 +43,8 @@ public class UnmarshalTracksTest {
 
     @Test
     public void testUnmarshalEmptyData() {
-        TracksTemplate tracksTemplate = new Gson().fromJson(Response.EMPTY_TRACKS_TEMPLATE_SPOTIFY, TracksTemplate.class);
-        List<Track> tracks = UnmarshalTracks.unmarshalTracks(tracksTemplate);
+        SpotifyTemplate tracksTemplate = new Gson().fromJson(Response.EMPTY_TRACKS_TEMPLATE_SPOTIFY, SpotifyTemplate.class);
+        List<Track> tracks = tracksTemplate.getNormalizedTracks();
 
         assertEquals(0, tracks.size());
     }

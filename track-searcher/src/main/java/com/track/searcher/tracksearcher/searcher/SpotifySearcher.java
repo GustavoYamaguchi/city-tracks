@@ -1,14 +1,14 @@
 package com.track.searcher.tracksearcher.searcher;
 
 import com.track.searcher.tracksearcher.constants.Message;
+import com.track.searcher.tracksearcher.constants.Propety;
 import com.track.searcher.tracksearcher.exception.PlaylistNotFoundException;
 import com.track.searcher.tracksearcher.exception.UnauthorizedException;
 import com.track.searcher.tracksearcher.model.Track;
 import com.track.searcher.tracksearcher.utils.RequestUtil;
-import com.track.searcher.tracksearcher.utils.UnmarshalTracks;
 import com.track.searcher.tracksearcher.utils.templates.ApiKey;
 import com.track.searcher.tracksearcher.utils.templates.Playlist;
-import com.track.searcher.tracksearcher.utils.templates.TracksTemplate;
+import com.track.searcher.tracksearcher.utils.templates.trackresponse.SpotifyTemplate;
 import org.springframework.http.*;
 
 import java.util.List;
@@ -29,8 +29,8 @@ public class SpotifySearcher implements TrackSearcher {
         }
 
         String tracksLink = retrievePlaylistForGenre(genre, accessToken);
-        TracksTemplate tracksTemplate = retrieveTracksFromLink(tracksLink, accessToken);
-        List<Track> tracks = UnmarshalTracks.unmarshalTracks(tracksTemplate);
+        SpotifyTemplate tracksTemplate = retrieveTracksFromLink(tracksLink, accessToken);
+        List<Track> tracks = tracksTemplate.getNormalizedTracks();
         return tracks;
     }
 
@@ -47,13 +47,13 @@ public class SpotifySearcher implements TrackSearcher {
         throw new PlaylistNotFoundException(String.format(Message.Exception.PLAYLIST_NOT_FOUND, genre));
     }
 
-    private TracksTemplate retrieveTracksFromLink(String tracksLink, String accessToken) throws PlaylistNotFoundException {
+    private SpotifyTemplate retrieveTracksFromLink(String tracksLink, String accessToken) throws PlaylistNotFoundException {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(accessToken);
 
-        ResponseEntity<TracksTemplate> response = RequestUtil.getResponse(headers, HttpMethod.GET, null,
-                tracksLink, TracksTemplate.class);
-        TracksTemplate tracks = response.getBody();
+        ResponseEntity<SpotifyTemplate> response = RequestUtil.getResponse(headers, HttpMethod.GET, null,
+                tracksLink, SpotifyTemplate.class);
+        SpotifyTemplate tracks = response.getBody();
 
         if (tracks.getItems().size() > 0) {
             return tracks;
@@ -64,8 +64,8 @@ public class SpotifySearcher implements TrackSearcher {
     private ApiKey refreshApiKey() throws UnauthorizedException {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        String clientId = System.getProperty("client.id");
-        String clientSecret = System.getProperty("client.secret");
+        String clientId = System.getProperty(Propety.CLIENT_ID);
+        String clientSecret = System.getProperty(Propety.CLIENT_SECRET);
         headers.setBasicAuth(clientId, clientSecret);
 
         String body = GRANT_TYPE + "=" + CLIENT_CREDENTIALS;

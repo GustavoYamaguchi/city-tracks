@@ -1,7 +1,8 @@
 package com.track.searcher.tracksearcher.searcher;
 
 import com.track.searcher.tracksearcher.utils.templates.ApiKey;
-import com.track.searcher.tracksearcher.utils.templates.TracksTemplate;
+import com.track.searcher.tracksearcher.utils.templates.trackresponse.SpotifyTemplate;
+import com.track.searcher.tracksearcher.utils.templates.trackresponse.TracksTemplate;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -36,7 +37,7 @@ public class SpotifySearcherTests {
         PowerMockito.doReturn(apiKey).when(spotifySearcher, "refreshApiKey");
         PowerMockito.doReturn(fakeUrl).when(spotifySearcher, "retrievePlaylistForGenre",
                 Mockito.eq(fakeGenre), Mockito.eq(fakeAccessToken));
-        TracksTemplate tracksTemplate = new TracksTemplate();
+        SpotifyTemplate tracksTemplate = new SpotifyTemplate();
         PowerMockito.doReturn(tracksTemplate).when(spotifySearcher, "retrieveTracksFromLink",
                 Mockito.eq(fakeUrl), Mockito.eq(fakeAccessToken));
 
@@ -55,7 +56,7 @@ public class SpotifySearcherTests {
         PowerMockito.doReturn(fakeAccessToken).when(spotifySearcher, "retrieveCachedApiKey");
         PowerMockito.doReturn(fakeUrl).when(spotifySearcher, "retrievePlaylistForGenre",
                 Mockito.eq(fakeGenre), Mockito.eq(fakeAccessToken));
-        TracksTemplate tracksTemplate = new TracksTemplate();
+        SpotifyTemplate tracksTemplate = new SpotifyTemplate();
         PowerMockito.doReturn(tracksTemplate).when(spotifySearcher, "retrieveTracksFromLink",
                 Mockito.eq(fakeUrl), Mockito.eq(fakeAccessToken));
 
