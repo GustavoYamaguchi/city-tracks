@@ -9,11 +9,14 @@ public class LocationUtil {
         if (location.getCity() != null && !location.getCity().isEmpty()) {
             return LocationType.CITY;
         }
+        if (location.getLatitude() == null || location.getLongitude() == null) {
+            return LocationType.INVALID;
+        }
         double lat;
         double lon;
         try {
             lat = Double.parseDouble(location.getLatitude());
-            lon = Double.parseDouble(location.getLatitude());
+            lon = Double.parseDouble(location.getLongitude());
         } catch (NumberFormatException e) {
             return LocationType.INVALID;
         }
