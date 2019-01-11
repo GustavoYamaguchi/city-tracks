@@ -1,4 +1,4 @@
-package com.weather.searcher.weathersearcher.controller;
+package com.weather.searcher.weathersearcher.model;
 
 public class Location {
 
@@ -29,4 +29,5 @@ public class Location {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
+
 }
