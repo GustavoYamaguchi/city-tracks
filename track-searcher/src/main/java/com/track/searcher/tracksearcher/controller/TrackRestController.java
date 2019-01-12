@@ -15,7 +15,7 @@ import java.util.List;
 @RestController
 public class TrackRestController {
 
-    @GetMapping(value = "/{genre}/{repository}")
+    @GetMapping(value = "/{repository}/{genre}")
     public List<Track> getTracks(@PathVariable String genre, @PathVariable String repository)
             throws PlaylistNotFoundException, UnauthorizedException {
         TrackRepository trackRepository = TrackRepository.fromText(repository);
