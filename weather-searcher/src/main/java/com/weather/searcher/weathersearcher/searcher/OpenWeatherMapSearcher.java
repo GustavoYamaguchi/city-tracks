@@ -29,10 +29,10 @@ public class OpenWeatherMapSearcher implements WeatherSearcher {
     public Weather getWeatherFrom(Location location) throws QueryException {
         String appId = System.getProperty(Property.APP_ID);
 
-        LocationType locationType = LocationUtil.getLocationType(location);
-        ResponseEntity<OpenWeatherMapTemplate> response = new ResponseEntity<>(HttpStatus.ALREADY_REPORTED);
+        ResponseEntity<OpenWeatherMapTemplate> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        String url = getCorrectUrl(location, appId);
         try {
-            response = getResponse(location, appId, locationType);
+            response = RequestUtil.getResponse(null, HttpMethod.GET, null, url, OpenWeatherMapTemplate.class);
         } catch (HttpStatusCodeException exception) {
             handleException(exception);
         }
@@ -52,16 +52,13 @@ public class OpenWeatherMapSearcher implements WeatherSearcher {
         }
     }
 
-    private ResponseEntity<OpenWeatherMapTemplate> getResponse(Location location, String appId, LocationType locationType)
-            throws InvalidLocationException {
-        String url;
+    private String getCorrectUrl(Location location, String appId) throws InvalidLocationException {
+        LocationType locationType = LocationUtil.getLocationType(location);
         switch (locationType) {
             case CITY_NAME:
-                url = String.format(QUERY_WEATHER_BY_NAME_URL, location.getCity(), appId);
-                return RequestUtil.getResponse(null, HttpMethod.GET, null, url, OpenWeatherMapTemplate.class);
+                return String.format(QUERY_WEATHER_BY_NAME_URL, location.getCity(), appId);
             case LAT_LON:
-                url = String.format(QUERY_WEATHER_BY_LAT_LON_URL, location.getLatitude(), location.getLongitude(), appId);
-                return RequestUtil.getResponse(null, HttpMethod.GET, null, url, OpenWeatherMapTemplate.class);
+                return String.format(QUERY_WEATHER_BY_LAT_LON_URL, location.getLatitude(), location.getLongitude(), appId);
             default:
                 throw new InvalidLocationException(Message.Exception.INVALID_LOCATION);
         }
