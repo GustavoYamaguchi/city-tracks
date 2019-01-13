@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
-@FeignClient(name = "track-searcher", url = "localhost:8082")
+@FeignClient(name = "track-searcher")
 public interface TrackSearcherProxy {
+
+
     @GetMapping("/{repository}/{genre}")
     List<TrackBean> getTracksByGenre(@PathVariable("repository") String repository, @PathVariable("genre") String genre);
 }

@@ -22,6 +22,7 @@ public class SpotifySearcher implements TrackSearcher {
 
     @Override
     public List<Track> getPlaylistFrom(String genre) throws PlaylistNotFoundException, UnauthorizedException {
+        //TODO: property name should reference Spotify, as we can have any other implementation of TrackSearcher.
         String accessToken;
         accessToken = retrieveCachedApiKey();
         if (accessToken == null || accessToken.isEmpty()) {

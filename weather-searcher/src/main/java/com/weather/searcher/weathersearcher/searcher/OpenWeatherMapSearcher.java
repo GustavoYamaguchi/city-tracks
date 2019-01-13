@@ -27,6 +27,7 @@ public class OpenWeatherMapSearcher implements WeatherSearcher {
 
     @Override
     public Weather getWeatherFrom(Location location) throws QueryException {
+        //TODO: property name should reference OWM, as we can have any other implementation of WeatherSearcher.
         String appId = System.getProperty(Property.APP_ID);
 
         ResponseEntity<OpenWeatherMapTemplate> response = new ResponseEntity<>(HttpStatus.BAD_REQUEST);
