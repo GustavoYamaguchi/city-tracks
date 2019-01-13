@@ -9,8 +9,6 @@ import java.util.List;
 
 @FeignClient(name = "track-searcher")
 public interface TrackSearcherProxy {
-
-
     @GetMapping("/{repository}/{genre}")
     List<TrackBean> getTracksByGenre(@PathVariable("repository") String repository, @PathVariable("genre") String genre);
 }
