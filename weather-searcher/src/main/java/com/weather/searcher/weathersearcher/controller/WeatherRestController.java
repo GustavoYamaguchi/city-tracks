@@ -10,12 +10,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.InvalidParameterException;
+
 @RestController
 public class WeatherRestController {
 
-    @GetMapping(value = "/{repository}")
+    @GetMapping(value = {"/{repository}", "/"})
     public Weather getWeather(@PathVariable String repository, Location location) throws QueryException {
-        WeatherRepository weatherRepository = WeatherRepository.fromText(repository);
+        WeatherRepository weatherRepository;
+        try {
+            weatherRepository = WeatherRepository.fromText(repository);
+        } catch (InvalidParameterException e) {
+            weatherRepository = WeatherRepository.OPEN_WEATHER_MAP;
+        }
         WeatherSearcher weatherSearcher = WeatherSearcherFactory.getWeatherSearcher(weatherRepository);
 
         Weather weather = weatherSearcher.retrieveCachedWeather(weatherRepository, location);

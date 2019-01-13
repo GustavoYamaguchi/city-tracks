@@ -15,15 +15,20 @@ import java.util.List;
 @RestController
 public class TrackRestController {
 
-    @GetMapping(value = "/{repository}/{genre}")
+    @GetMapping(value = {"/{repository}/{genre}", "/{genre}"})
     public List<Track> getTracks(@PathVariable String genre, @PathVariable String repository)
             throws PlaylistNotFoundException, UnauthorizedException {
-        TrackRepository trackRepository = TrackRepository.fromText(repository);
+        TrackRepository trackRepository;
+        try {
+            trackRepository = TrackRepository.fromText(repository);
+        } catch (IllegalArgumentException e) {
+            trackRepository = TrackRepository.SPOTIFY;
+        }
         TrackSearcher trackSearcher = TrackSearcherFactory.getTrackSearcher(trackRepository);
         List<Track> tracks;
 
         tracks = trackSearcher.retrieveCachedPlaylist(genre, trackRepository);
-        if (tracks == null){
+        if (tracks == null) {
             tracks = trackSearcher.getPlaylistFrom(genre);
         }
         return tracks;
