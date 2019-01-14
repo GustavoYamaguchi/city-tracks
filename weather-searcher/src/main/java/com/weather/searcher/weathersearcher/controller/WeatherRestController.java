@@ -20,7 +20,7 @@ public class WeatherRestController {
     private static final Logger logger = LogManager.getLogger(WeatherRestController.class);
 
     @GetMapping(value = {"/{repository}", "/"})
-    public Weather getWeather(@PathVariable String repository, Location location) throws QueryException {
+    public Weather getWeather(@PathVariable(required = false) String repository, Location location) throws QueryException {
         logger.info("Getting weather from " + location);
         WeatherRepository weatherRepository;
         try {

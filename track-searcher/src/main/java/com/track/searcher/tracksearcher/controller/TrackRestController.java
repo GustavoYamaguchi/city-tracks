@@ -20,7 +20,7 @@ public class TrackRestController {
     private static final Logger logger = LogManager.getLogger(TrackRestController.class);
 
     @GetMapping(value = {"/{repository}/{genre}", "/{genre}"})
-    public List<Track> getTracks(@PathVariable String genre, @PathVariable String repository)
+    public List<Track> getTracks(@PathVariable String genre, @PathVariable(required = false) String repository)
             throws PlaylistNotFoundException, UnauthorizedException {
         logger.info("Getting track for genre " + genre);
         TrackRepository trackRepository;
