@@ -1,5 +1,7 @@
 FROM openjdk:8
 
-ADD target/city-track-core.jar /
+RUN git clone https://github.com/GustavoYamaguchi/city-tracks.git
 
-CMD ["java", "-jar", "city-track-core.jar"]
+WORKDIR /city-tracks/city-track-core
+
+CMD ./mvnw spring-boot:run
