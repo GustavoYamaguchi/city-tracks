@@ -32,8 +32,8 @@ public class PlaylistMakerController {
     public TracksResponse createPlaylistFor(Location location,
                                             @RequestParam(required = false, defaultValue = Repositories.Weather.OPEN_WEATHER_MAP_REPOSITORY) String weatherRepo,
                                             @RequestParam(required = false, defaultValue = Repositories.Tracks.SPOTIFY_REPOSITORY) String trackRepo) {
-        logger.info(String.format("Searching playlist for %s with weather repository: %s and track repository: %s"),
-                location, weatherRepo, trackRepo);
+        logger.info(String.format("Searching playlist for %s with weather repository: %s and track repository: %s",
+                location.toString(), weatherRepo, trackRepo));
         WeatherBean weatherBean = weatherProxy.getWeather(weatherRepo, location.getCity(),
                 location.getLatitude(), location.getLongitude());
         String genre = GenreResolver.getGenre(weatherBean);
