@@ -1,0 +1,29 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: track-searcher
+spec:
+  replicas: 1
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1 
+  template:
+    metadata:
+      labels:
+        app: track-searcher
+    spec:
+      containers:
+      - image: gustavoyama/track-searcher
+        imagePullPolicy: Always
+        name: track-searcher
+        env:
+          - name: CLIENT_ID
+            value: # spotify_client_id
+          - name: CLIENT_SECRET
+            value: # spotify_client_secret
+        ports:
+          - containerPort: 8080
+

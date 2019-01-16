@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: weather-searcher
+spec:
+  replicas: 1
+  minReadySeconds: 15
+  strategy:
+    type: RollingUpdate
+    rollingUpdate: 
+      maxUnavailable: 1
+      maxSurge: 1 
+  template:
+    metadata:
+      labels:
+        app: weather-searcher
+    spec:
+      containers:
+      - image: gustavoyama/weather-searcher
+        imagePullPolicy: Always
+        name: weather-searcher
+        env:
+          - name: APP_ID
+            value: # open_weather_map_appid
+        ports:
+          - containerPort: 8080
+
