@@ -1,0 +1,47 @@
+version: '3.4'
+services:
+    naming-server:
+        image: gustavoyama/eureka-server
+        container_name: eureka-server
+        ports:
+          - 8761:8761
+    city-track-core:
+        image: gustavoyama/city-track-core
+        container_name: city-track-core
+        depends_on:
+          - naming-server
+        links:
+          - naming-server
+        ports:
+          - 8080:8080
+        environment:
+          - NAMING_SERVER_URL=http://naming-server:8761/eureka
+    weather-searcher:
+        image: gustavoyama/weather-searcher
+        container_name: weather-searcher
+        depends_on:
+          - naming-server
+        links:
+          - naming-server
+        #deploy:
+        #  replicas: 2
+        ports:
+          - 8081:8080
+        environment:
+          - NAMING_SERVER_URL=http://naming-server:8761/eureka
+          - APP_ID= # open_weather_map_appid
+    track-searcher:
+        image: gustavoyama/track-searcher
+        container_name: track-searcher
+        depends_on:
+          - naming-server
+        links:
+          - naming-server
+        #deploy:
+        #  replicas: 2
+        ports:
+          - 8082:8080
+        environment:
+          - NAMING_SERVER_URL=http://naming-server:8761/eureka
+          - CLIENT_ID= # spotify_client_id
+          - CLIENT_SECRET= # spotify_client_secret
