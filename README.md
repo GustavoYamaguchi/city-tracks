@@ -1,88 +1,183 @@
-# City Tracks
-City tracks is an application that returns playlist suggestion according to the current temperature from a specific city. Let's suppose you're in a very hot city and you decide to get tracks from our application, you will get a list of tracks for party.
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+[![MIT License][license-shield]][license-url]
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
-## Business rules
 
-For a given temperature (celsius):
-* If above 30 degrees, we suggest songs for party;
-* If it's between 15 and 30 degrees, we suggest pop songs;
-* If it's between 10 and 14 degrees, we suggest rock songs;
-* Otherwise, if it's less than 10 , we suggest classical songs.
 
-## Stack
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/othneildrew/Best-README-Template">
+    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-Java 8  
-Spring Boot  
-Eureka  
-Ribbon  
-PowerMock  
-Mockito  
+  <h3 align="center">Best-README-Template</h3>
 
-## Pre conditions
+  <p align="center">
+    An awesome README template to jumpstart your projects!
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+  </p>
+</p>
 
-To run those applications you'll need to have Maven and Java 8 installed;
-You will also need to have access to [Spotify](https://developer.spotify.com/dashboard/) and [OpenWeatherMap's](https://openweathermap.org/appid) API.
 
-## Running
 
-For each service implemmented here, you need to run it into your terminal.  
-Open your terminal and type ```cd [directory-name]``` to access its directory, and then:  
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-* For directory **city-track-core** run:  
-```./mvnw spring-boot:run```  
+* [About the Project](#about-the-project)
+  * [Built With](#built-with)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [License](#license)
+* [Contact](#contact)
+* [Acknowledgements](#acknowledgements)
 
-* For directory **eureka-server** run:  
-```./mvnw spring-boot:run```  
 
-* For directory **track-searcher** run:  
-```./mvnw spring-boot:run -Dspring-boot.run.arguments="--server.port=8081" -Dspring-boot.run.jvmArguments="-DclientId=[CLIENT_ID] -DclientSecret=[CLIENT_SECRET]"```  
 
-* For directory **weather-searcher** run:  
-```./mvnw spring-boot:run -Dspring-boot.run.arguments="--server.port=8082" -Dspring-boot.run.jvmArguments="-DappId=[APP_ID]"```  
+<!-- ABOUT THE PROJECT -->
+## About The Project
 
-To run more than one weather or track searcher, remmember to change **--server.port** argument.
+[![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-## Usage
+There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
 
-To use it you'll need to access city-track-core application, to do so, you'll need its address (by default) at http://localhost:8080.  
+Here's why:
+* Your time should be focused on creating something amazing. A project that solves a problem and helps others
+* You shouldn't be doing the same tasks over and over like creating a README from scratch
+* You should element DRY principles to the rest of your life :smile:
 
-To request for suggested tracks for a specific city (in example João Pessoa, but feel free to ask for any other city), open you terminal and type:  
-```curl 'http://localhost:8080?city=joao+pessoa'```  
-```curl 'http://localhost:8080?city=joao%20pessoa'```  
-Note that to separate 2 words you must use **'+'** or **'%20'**.  
+Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue.
 
-You can alternatively use latitude and longitude as parameters to generate a new playlist:  
-```curl 'http://localhost:8080?latitude=-7.12&longitude=-34.86'```  
-Note that to separate latitude and longitude we must use an ampersand **'&'**.  
+A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
-## Response
+### Built With
+This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
+* [Bootstrap](https://getbootstrap.com)
+* [JQuery](https://jquery.com)
+* [Laravel](https://laravel.com)
 
-An example of response:
-```json
-{
-  "genre": "Pop",
-  "temperature": 26,
-  "tracks": [
-    {
-      "name": "You Are The Reason - Duet Version"
-    },
-    {
-      "name": "You Say"
-    },
-    {
-      "name": "Space for Two"
-    }
-  ]
-}
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps.
+
+### Prerequisites
+
+This is an example of how to list things you need to use the software and how to install them.
+* npm
+```sh
+npm install npm@latest -g
 ```
 
-## Future improvements
+### Installation
 
-In the future we think that this application would be better if:
-* We had good deployment to make it easy to scale, resilient and easy to deploy;
-* Redis cache mechanism would be good to store Spotify's access token and playlists, and also temperatures;
-* Improve tests coverage, making our code even more realible;
-* Implement an API documentation, Swagger would be a great path for this;
-* Add new repositories to query for weather, and also tracks repositories, like Deezer and Youtube.
+1. Get a free API Key at [https://example.com](https://example.com)
+2. Clone the repo
+```sh
+git clone https://github.com/your_username_/Project-Name.git
+```
+3. Install NPM packages
+```sh
+npm install
+```
+4. Enter your API in `config.js`
+```JS
+const API_KEY = 'ENTER YOUR API';
+```
 
-With these improvements we would have a great brand new release.
+
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+_For more examples, please refer to the [Documentation](https://example.com)_
+
+
+
+<!-- ROADMAP -->
+## Roadmap
+
+See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
+
+
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+
+<!-- LICENSE -->
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
+
+<!-- CONTACT -->
+## Contact
+
+Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+
+Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+
+
+
+<!-- ACKNOWLEDGEMENTS -->
+## Acknowledgements
+* [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+* [Img Shields](https://shields.io)
+* [Choose an Open Source License](https://choosealicense.com)
+* [GitHub Pages](https://pages.github.com)
+* [Animate.css](https://daneden.github.io/animate.css)
+* [Loaders.css](https://connoratherton.com/loaders)
+* [Slick Carousel](https://kenwheeler.github.io/slick)
+* [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
+* [Sticky Kit](http://leafo.net/sticky-kit)
+* [JVectorMap](http://jvectormap.com)
+* [Font Awesome](https://fontawesome.com)
+
+
+
+
+
+<!-- MARKDOWN LINKS & IMAGES -->
+<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=flat-square
+[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=flat-square
+[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=flat-square
+[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=flat-square
+[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
+[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=flat-square
+[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
+[linkedin-url]: https://linkedin.com/in/othneildrew
+[product-screenshot]: images/screenshot.png
