@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.jinhetech.common;
+package com.track.searcher.tracksearcher.utils;
 
 import java.net.InetAddress;
 public class UUIDHexGenerator {
